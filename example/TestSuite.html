@@ -3,10 +3,15 @@
 	<title>W2GL Examples</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../build/w2gl.js"></script>
 	<script type="text/javascript">
 
 		(function (global){
 			
+			"use strict";
+
+			var gl;
+
 			function HelloTriangle()
 			{
 				
@@ -14,12 +19,19 @@
 
 			var p = HelloTriangle.prototype;
 
-			p.init = function()
+			p.init = function( webglContext )
 			{
-				console.log( "init" );
+				gl = webglContext;
+
+				this.createBufferAndUpload();
 			};
 
 			p.dipose = function()
+			{
+				
+			};
+
+			p.createBufferAndUpload = function()
 			{
 				
 			};
@@ -43,7 +55,6 @@
 			function init()
 			{
 				gl = document.getElementById( "canvas" ).getContext( "webgl" );
-				console.log( gl );
 
 				appendItems();
 			};
@@ -66,6 +77,7 @@
 				});
 
 				switchCase( select.selectedIndex );
+				debugger;
 			};
 
 			function switchCase( index )
@@ -74,7 +86,7 @@
 					currentCase.dispose();
 
 				currentCase = getDefinition( index );
-				currentCase.init();
+				currentCase.init( gl );
 			}
 
 			function getDefinition( index )
