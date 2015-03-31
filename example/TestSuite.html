@@ -1,0 +1,121 @@
+<html>
+<head>
+	<title>W2GL Examples</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript">
+
+		(function (global){
+			
+			function HelloTriangle()
+			{
+				
+			};
+
+			var p = HelloTriangle.prototype;
+
+			p.init = function()
+			{
+				console.log( "init" );
+			};
+
+			p.dipose = function()
+			{
+				
+			};
+
+			global.HelloTriangle = HelloTriangle;
+
+		})(this);
+
+		(function function_name( global ){
+			
+			"use strict";
+
+			var CASE_LIST = [
+				{ title: "Hello Triangle", def: HelloTriangle },
+			];
+
+			var currentCase,
+				gl,
+				caseList = [];
+
+			function init()
+			{
+				gl = document.getElementById( "canvas" ).getContext( "webgl" );
+				console.log( gl );
+
+				appendItems();
+			};
+
+			function appendItems()
+			{
+				var select = document.getElementById( "combo_select" ),
+					option;
+
+				for( var i = 0, l = CASE_LIST.length; i < l; i++ )	
+				{
+					option = document.createElement( "option" );
+					option.innerHTML = CASE_LIST[i].title;
+
+					select.appendChild( option );
+				}
+
+				$(select).on( "change", function(e){
+					switchCase( e.currentTarget.selectedIndex );
+				});
+
+				switchCase( select.selectedIndex );
+			};
+
+			function switchCase( index )
+			{
+				if( currentCase != null )
+					currentCase.dispose();
+
+				currentCase = getDefinition( index );
+				currentCase.init();
+			}
+
+			function getDefinition( index )
+			{
+				if( index < 0 || index >= CASE_LIST.length ) return null;
+
+				if( !caseList[ index ] )
+					caseList[ index ] = new CASE_LIST[ index ].def();
+
+				return caseList[ index ];
+			};
+
+			window.onload = init;
+
+		})( this );
+
+	</script>
+
+	<style>
+		body{
+			font-family: helvetica;
+		}
+
+		#canvas{
+			border: 1px solid #adadad;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="head">
+			<h1>W2GL Examples</h1>
+		</div>
+		<div class="content">
+			<canvas id="canvas" width="1180" height="800"></canvas>
+		</div>
+		<div class="footer">
+			<select name="" id="combo_select">
+			</select>
+		</div>
+	</div>
+</body>
+</html>
