@@ -1,4 +1,11 @@
 
+/************************************************************
+*
+*  libs Main
+*
+*************************************************************/
+
+
 this.w2gl = this.w2gl || {};
 
 this.w2gl.usenamespace = function( global, scope )
@@ -26,4 +33,6 @@ this.w2gl.usenamespace = function( global, scope )
 	} 
 };
 
+
 this.w2gl.usenamespace( this );
+

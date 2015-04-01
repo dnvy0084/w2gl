@@ -35,7 +35,9 @@ module.exports = function(grunt) {
         concat: {
             basic: {
                 src: [
-                    "src/*.js" 
+                    "src/w2gl.js",
+                    "src/util/*.js",
+                    "src/**/*.js" 
                 ],
 
                 dest: "build/<%= pkg.name %>.js" 
@@ -44,7 +46,7 @@ module.exports = function(grunt) {
 
         watch: {
             scripts: {
-                files: ['src/*.js'],
+                files: ['src/**/*.js'],
                 tasks: ['concat']
             },
         }

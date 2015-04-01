@@ -4,45 +4,14 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../build/w2gl.js"></script>
+	<script type="text/javascript" src="js/HelloTriangle.js"></script>
 	<script type="text/javascript">
 
-		(function (global){
-			
+		(function ( global ){
+	
 			"use strict";
 
-			var gl;
-
-			function HelloTriangle()
-			{
-				
-			};
-
-			var p = HelloTriangle.prototype;
-
-			p.init = function( webglContext )
-			{
-				gl = webglContext;
-
-				this.createBufferAndUpload();
-			};
-
-			p.dipose = function()
-			{
-				
-			};
-
-			p.createBufferAndUpload = function()
-			{
-				
-			};
-
-			global.HelloTriangle = HelloTriangle;
-
-		})(this);
-
-		(function function_name( global ){
-			
-			"use strict";
+			var util = require( "util" );
 
 			var CASE_LIST = [
 				{ title: "Hello Triangle", def: HelloTriangle },
@@ -54,7 +23,9 @@
 
 			function init()
 			{
-				gl = document.getElementById( "canvas" ).getContext( "webgl" );
+				gl = util.getContext( "canvas" );
+
+				if( gl == null ) return;
 
 				appendItems();
 			};
@@ -77,7 +48,6 @@
 				});
 
 				switchCase( select.selectedIndex );
-				debugger;
 			};
 
 			function switchCase( index )
