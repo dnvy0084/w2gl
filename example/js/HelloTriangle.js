@@ -17,13 +17,17 @@
 	p.init = function( webglContext )
 	{
 		gl = webglContext;
+		gl.clearColor( 0, 0, 0, 1 );
 		
 		this.makeProgramAndInitShaders();
 	};
 
 	p.dispose = function()
 	{
-		
+		gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
+
+		gl.deleteBuffer( buffer );
+		gl.deleteProgram( program );
 	};
 
 	p.createBufferAndUpload = function()

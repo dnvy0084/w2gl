@@ -33,6 +33,9 @@ this.w2gl.usenamespace = function( global, scope )
 	} 
 };
 
-
 this.w2gl.usenamespace( this );
+
+var math = namespace( "math" );
+
+math.RAD = math.RAD || 1 * Math.PI / 180;
 

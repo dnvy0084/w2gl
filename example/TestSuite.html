@@ -3,8 +3,10 @@
 	<title>W2GL Examples</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://dnvy0084.github.io/l2/js/stats.min.js"></script>
 	<script src="../build/w2gl.js"></script>
 	<script type="text/javascript" src="js/HelloTriangle.js"></script>
+	<script type="text/javascript" src="js/TransformTriangle.js"></script>
 	<script type="text/javascript">
 
 		(function ( global ){
@@ -14,15 +16,17 @@
 			var util = require( "util" );
 
 			var CASE_LIST = [
+				{ title: "Transform Triangle", def: TransformTriangle, args: [ 100 ] },
 				{ title: "Hello Triangle", def: HelloTriangle },
 			];
 
 			var currentCase,
-				gl,
+				gl, stats,
 				caseList = [];
 
 			function init()
 			{
+				stats = addStats();
 				gl = util.getContext( "canvas" );
 
 				if( gl == null ) return;
@@ -56,7 +60,15 @@
 					currentCase.dispose();
 
 				currentCase = getDefinition( index );
-				currentCase.init( gl );
+
+				if( CASE_LIST[ index ].hasOwnProperty( "args" ) )
+				{
+					currentCase.init.apply( currentCase, [gl].concat( CASE_LIST[ index ].args ) );
+				}
+				else
+				{
+					currentCase.init( gl );
+				}
 			}
 
 			function getDefinition( index )
@@ -64,9 +76,26 @@
 				if( index < 0 || index >= CASE_LIST.length ) return null;
 
 				if( !caseList[ index ] )
+				{
 					caseList[ index ] = new CASE_LIST[ index ].def();
+					caseList[ index ].stats = stats;
+				}
 
 				return caseList[ index ];
+			};
+
+			function addStats()
+			{
+				var stats = new Stats();
+
+				stats.setMode(0);
+				/*stats.domElement.style.position = "absolute";
+				stats.domElement.style.top = "0px";
+				stats.domElement.style.left = "0px";*/
+
+				document.body.appendChild( stats.domElement );
+
+				return stats;
 			};
 
 			window.onload = init;
