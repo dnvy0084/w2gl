@@ -7,8 +7,10 @@
 
 (function(){
 	
-	var math = namespace( "math" ),
+	var math = require( "math" ),
 		util = require( "util" );
+
+	math.RAD = math.RAD || 1 * Math.PI / 180;
 
 	function Mat4( raw )
 	{

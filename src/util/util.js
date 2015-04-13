@@ -8,7 +8,7 @@
 
 (function (){
 	
-	var util = namespace( "util" );
+	var util = require( "util" );
 
 	util.getContext = function( canvas )
 	{

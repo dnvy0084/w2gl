@@ -1,7 +1,7 @@
 
 (function (){
 	
-	var graphics = namespace( "graphics" ),
+	var graphics = require( "graphics" ),
 		math = require( "math" );
 
 	var colorBuffer, indexBuffer, orthogonal;

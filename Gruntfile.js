@@ -35,9 +35,11 @@ module.exports = function(grunt) {
         concat: {
             basic: {
                 src: [
+                    "src/namespace.js",
                     "src/w2gl.js",
-                    "src/util/*.js",
-                    "src/**/*.js" 
+                    "src/util/**/*.js",
+                    "src/math/**/*.js",
+                    "src/**/*.js"
                 ],
 
                 dest: "build/<%= pkg.name %>.js" 
